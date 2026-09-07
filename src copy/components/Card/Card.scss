@@ -1,0 +1,41 @@
+.card-base {
+  overflow: hidden;
+  border-width: 2px;
+  border-style: solid;
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.card-image-wrapper {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.card-content {
+  padding: 0 1.25rem 1.25rem;
+}
