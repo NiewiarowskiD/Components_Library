@@ -1,5 +1,6 @@
 import React from "react";
 import type { LucideIcon } from "lucide-react";
+import "./Button.scss";
 
 export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonVariant = "solid" | "outline";
@@ -64,7 +65,6 @@ interface ButtonStyles {
   backgroundColor: string;
   color: string;
   borderColor: string;
-  hoverBg: string;
 }
 
 function getStyles(
@@ -81,7 +81,6 @@ function getStyles(
       backgroundColor: "transparent",
       color: borderColor,
       borderColor: borderColor,
-      hoverBg: `${borderColor}1a`,
     };
   }
 
@@ -89,7 +88,6 @@ function getStyles(
     backgroundColor: color,
     color: textColor,
     borderColor: color,
-    hoverBg: darken(color, 0.12),
   };
 }
 
@@ -154,7 +152,7 @@ export function Button({
     <Icon
       size={sizeClasses.iconSize}
       strokeWidth={2}
-      className={text ? (iconPosition === "left" ? "mr-2" : "ml-2") : ""}
+      className={`btn-icon ${text ? (iconPosition === "left" ? "mr-2" : "ml-2") : ""}`}
     />
   ) : null;
 
@@ -163,7 +161,7 @@ export function Button({
       type={type}
       disabled={disabled}
       onClick={handleClick}
-      className={`inline-flex items-center justify-center font-semibold transition-all duration-200 border-2 select-none ${sizeClasses.padding} ${sizeClasses.textSize} ${roundedClass} ${disabled ? "opacity-50 cursor-not-allowed" : "hover:brightness-110 active:scale-95 cursor-pointer"} ${className}`}
+      className={`btn-base ${sizeClasses.padding} ${sizeClasses.textSize} ${roundedClass} ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`}
       style={{
         backgroundColor: styles.backgroundColor,
         color: styles.color,

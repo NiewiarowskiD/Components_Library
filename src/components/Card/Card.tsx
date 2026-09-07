@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import "./Card.scss";
 
 export type CardRounded = "none" | "sm" | "md" | "lg" | "xl";
 export type CardShadow = "none" | "sm" | "md" | "lg" | "xl";
@@ -113,16 +114,15 @@ export function Card({
 
   return (
     <div
-      className={`overflow-hidden border-2 transition-all duration-300 ${roundedClass} ${shadowClass} ${className}`}
+      className={`card-base ${roundedClass} ${shadowClass} ${className}`}
       style={{
         backgroundColor: color,
         borderColor: borderColor,
         color: textColor,
       }}
     >
-      {/* Header with title and close button */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <div className="flex items-center gap-2">
+      <div className="card-header">
+        <div className="card-title-row">
           {TitleIcon && (
             <TitleIcon
               size={20}
@@ -136,7 +136,7 @@ export function Card({
           <button
             type="button"
             onClick={handleClose}
-            className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 ${closeHover} flex-shrink-0`}
+            className={`card-close-btn ${closeHover}`}
             style={{ color: textColor }}
             aria-label="Close card"
           >
@@ -145,9 +145,8 @@ export function Card({
         )}
       </div>
 
-      {/* Optional image */}
       {image && (
-        <div className="px-5 pb-4">
+        <div className="card-image-wrapper">
           <div className={`overflow-hidden ${roundedClass} ${imageHeight}`}>
             <img
               src={image}
@@ -158,9 +157,8 @@ export function Card({
         </div>
       )}
 
-      {/* Content area */}
       {children && (
-        <div className={`px-5 pb-5 ${subtitleColor}`}>{children}</div>
+        <div className={`card-content ${subtitleColor}`}>{children}</div>
       )}
     </div>
   );

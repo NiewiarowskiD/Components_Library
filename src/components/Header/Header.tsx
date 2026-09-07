@@ -1,4 +1,5 @@
 import React from "react";
+import "./Header.scss";
 
 export type HeaderLayout =
   | "start"
@@ -162,7 +163,7 @@ export function Header({
 }: HeaderProps) {
   const textColor = getContrastColor(color);
   const classes = [
-    "flex items-center w-full transition-all duration-300 border-2",
+    "header-base",
     getLayoutClass(layout),
     getStickyClass(sticky),
     getRoundedClass(rounded),

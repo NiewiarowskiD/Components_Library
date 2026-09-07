@@ -1,4 +1,5 @@
 import React from "react";
+import "./Text.scss";
 
 export type TextSize =
   | "xs"
@@ -143,6 +144,7 @@ export function Text({
 }: TextProps) {
   const Tag = as;
   const classes = [
+    "text-base-c",
     getSizeClass(size),
     getWeightClass(weight),
     getAlignClass(align),
