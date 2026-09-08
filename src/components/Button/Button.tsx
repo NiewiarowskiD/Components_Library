@@ -58,7 +58,7 @@ function getContrastColor(hex: string): string {
   if (!rgb) return "#ffffff";
   const [r, g, b] = rgb;
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.55 ? "#1a1a1a" : "#ffffff";
+  return luminance > 0.55 ? "#09090B" : "#ffffff";
 }
 
 interface ButtonStyles {
@@ -127,7 +127,7 @@ export function Button({
   text,
   icon: Icon,
   iconPosition = "left",
-  color = "#3b82f6",
+  color = "#10B981",
   outlineColor,
   variant = "solid",
   size = "md",

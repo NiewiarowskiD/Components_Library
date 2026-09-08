@@ -45,10 +45,10 @@ function hexToRgb(hex: string): [number, number, number] | null {
 
 function getContrastColor(hex: string): string {
   const rgb = hexToRgb(hex);
-  if (!rgb) return "#1e293b";
+  if (!rgb) return "#E4E4E7";
   const [r, g, b] = rgb;
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.55 ? "#1e293b" : "#ffffff";
+  return luminance > 0.55 ? "#09090B" : "#ffffff";
 }
 
 function getLayoutClass(layout: HeaderLayout): string {
@@ -150,8 +150,8 @@ function getPaddingClass(padding: HeaderProps["padding"]): string {
 }
 
 export function Header({
-  color = "#1e293b",
-  borderColor = "transparent",
+  color = "#18181B",
+  borderColor = "#27272A",
   layout = "start",
   sticky = "none",
   rounded = "none",

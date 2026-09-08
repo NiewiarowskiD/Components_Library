@@ -130,7 +130,7 @@ function getLetterSpacingClass(ls: TextProps["letterSpacing"]): string {
 
 export function Text({
   content,
-  color = "#1e293b",
+  color = "#E4E4E7",
   size = "base",
   weight = "normal",
   align = "left",

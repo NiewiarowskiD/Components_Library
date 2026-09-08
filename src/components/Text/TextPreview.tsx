@@ -11,10 +11,10 @@ function Section({
 }) {
   return (
     <div className="mb-8">
-      <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-4">
+      <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-4">
         {title}
       </h2>
-      <div className="flex flex-wrap gap-3 items-stretch bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div className="flex flex-wrap gap-3 items-stretch bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-700 p-6">
         {children}
       </div>
     </div>
@@ -26,62 +26,62 @@ export function TextPreview() {
     <div>
       <Section title="Text — Sizes">
         <div className="w-full space-y-3">
-          <Text content="Extra Small (xs)" color="#1e293b" size="xs" />
-          <Text content="Small (sm)" color="#1e293b" size="sm" />
-          <Text content="Base (base)" color="#1e293b" size="base" />
-          <Text content="Large (lg)" color="#1e293b" size="lg" />
-          <Text content="Extra Large (xl)" color="#1e293b" size="xl" />
-          <Text content="2XL" color="#1e293b" size="2xl" weight="bold" />
-          <Text content="3XL" color="#1e293b" size="3xl" weight="bold" />
-          <Text content="4XL" color="#1e293b" size="4xl" weight="extrabold" />
+          <Text content="Extra Small (xs)" color="#E4E4E7" size="xs" />
+          <Text content="Small (sm)" color="#E4E4E7" size="sm" />
+          <Text content="Base (base)" color="#E4E4E7" size="base" />
+          <Text content="Large (lg)" color="#E4E4E7" size="lg" />
+          <Text content="Extra Large (xl)" color="#E4E4E7" size="xl" />
+          <Text content="2XL" color="#E4E4E7" size="2xl" weight="bold" />
+          <Text content="3XL" color="#E4E4E7" size="3xl" weight="bold" />
+          <Text content="4XL" color="#E4E4E7" size="4xl" weight="extrabold" />
         </div>
       </Section>
 
       <Section title="Text — Weights">
         <div className="w-full space-y-2">
-          <Text content="Normal weight" color="#1e293b" size="lg" weight="normal" />
-          <Text content="Medium weight" color="#1e293b" size="lg" weight="medium" />
-          <Text content="Semibold weight" color="#1e293b" size="lg" weight="semibold" />
-          <Text content="Bold weight" color="#1e293b" size="lg" weight="bold" />
-          <Text content="Extrabold weight" color="#1e293b" size="lg" weight="extrabold" />
+          <Text content="Normal weight" color="#E4E4E7" size="lg" weight="normal" />
+          <Text content="Medium weight" color="#E4E4E7" size="lg" weight="medium" />
+          <Text content="Semibold weight" color="#E4E4E7" size="lg" weight="semibold" />
+          <Text content="Bold weight" color="#E4E4E7" size="lg" weight="bold" />
+          <Text content="Extrabold weight" color="#E4E4E7" size="lg" weight="extrabold" />
         </div>
       </Section>
 
       <Section title="Text — Custom HEX Colors">
         <div className="w-full space-y-2">
-          <Text content="Blue text (#3b82f6)" color="#3b82f6" size="lg" weight="semibold" />
+          <Text content="Emerald text (#10B981)" color="#10B981" size="lg" weight="semibold" />
           <Text content="Green text (#22c55e)" color="#22c55e" size="lg" weight="semibold" />
           <Text content="Red text (#ef4444)" color="#ef4444" size="lg" weight="semibold" />
           <Text content="Amber text (#f59e0b)" color="#f59e0b" size="lg" weight="semibold" />
-          <Text content="Slate text (#1e293b)" color="#1e293b" size="lg" weight="semibold" />
+          <Text content="Light text (#E4E4E7)" color="#E4E4E7" size="lg" weight="semibold" />
         </div>
       </Section>
 
       <Section title="Text — Alignment">
         <div className="w-full space-y-2">
-          <Text content="Left aligned text" color="#1e293b" size="lg" align="left" />
-          <Text content="Center aligned text" color="#1e293b" size="lg" align="center" />
-          <Text content="Right aligned text" color="#1e293b" size="lg" align="right" />
-          <Text content="Justify aligned text — this longer line demonstrates how justify alignment distributes space evenly between words in a paragraph." color="#1e293b" size="base" align="justify" />
+          <Text content="Left aligned text" color="#E4E4E7" size="lg" align="left" />
+          <Text content="Center aligned text" color="#E4E4E7" size="lg" align="center" />
+          <Text content="Right aligned text" color="#E4E4E7" size="lg" align="right" />
+          <Text content="Justify aligned text — this longer line demonstrates how justify alignment distributes space evenly between words in a paragraph." color="#E4E4E7" size="base" align="justify" />
         </div>
       </Section>
 
       <Section title="Text — Styles">
         <div className="w-full space-y-2">
-          <Text content="Italic text" color="#1e293b" size="lg" italic />
-          <Text content="Underlined text" color="#1e293b" size="lg" underline />
-          <Text content="Uppercase text" color="#1e293b" size="lg" uppercase />
-          <Text content="Wide tracking" color="#1e293b" size="lg" letterSpacing="wide" />
-          <Text content="Widest tracking" color="#1e293b" size="lg" letterSpacing="widest" />
+          <Text content="Italic text" color="#E4E4E7" size="lg" italic />
+          <Text content="Underlined text" color="#E4E4E7" size="lg" underline />
+          <Text content="Uppercase text" color="#E4E4E7" size="lg" uppercase />
+          <Text content="Wide tracking" color="#E4E4E7" size="lg" letterSpacing="wide" />
+          <Text content="Widest tracking" color="#E4E4E7" size="lg" letterSpacing="widest" />
         </div>
       </Section>
 
       <Section title="Text — Inside Headers">
         <div className="w-full space-y-4">
-          <Header color="#0f172a" layout="center" rounded="lg" shadow="md" height="lg">
-            <Text content="Header Title" color="#f8fafc" size="2xl" weight="bold" />
+          <Header color="#09090B" borderColor="#27272A" layout="center" rounded="lg" shadow="md" height="lg">
+            <Text content="Header Title" color="#E4E4E7" size="2xl" weight="bold" />
           </Header>
-          <Header color="#3b82f6" layout="between" rounded="lg" shadow="md" height="md">
+          <Header color="#10B981" layout="between" rounded="lg" shadow="md" height="md">
             <Text content="Brand Name" color="#ffffff" size="xl" weight="extrabold" />
             <Text content="Menu" color="#ffffff" size="base" weight="medium" />
           </Header>
