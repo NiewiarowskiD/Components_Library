@@ -1,0 +1,121 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  animation: modal-overlay-in 0.2s ease;
+}
+
+@keyframes modal-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: #18181B;
+  border: 1px solid #3F3F46;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  animation: modal-content-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-content-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-sm {
+  width: 100%;
+  max-width: 24rem;
+}
+
+.modal-md {
+  width: 100%;
+  max-width: 32rem;
+}
+
+.modal-lg {
+  width: 100%;
+  max-width: 48rem;
+}
+
+.modal-xl {
+  width: 100%;
+  max-width: 64rem;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #27272A;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #E4E4E7;
+  margin: 0;
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  color: #71717A;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #F87171;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #10B981;
+    outline-offset: 2px;
+  }
+}
+
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  color: #A1A1AA;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.625rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #27272A;
+}

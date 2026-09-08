@@ -1,0 +1,132 @@
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+  position: relative;
+}
+
+.select-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #D4D4D8;
+}
+
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #E4E4E7;
+  background-color: #18181B;
+  border: 2px solid #3F3F46;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus,
+  &.select-open {
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  }
+}
+
+.select-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #09090B;
+}
+
+.select-error {
+  border-color: #EF4444;
+
+  &:focus,
+  &.select-open {
+    border-color: #EF4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  }
+}
+
+.select-value {
+  font-weight: 500;
+}
+
+.select-placeholder {
+  color: #71717A;
+}
+
+.select-chevron {
+  color: #71717A;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.select-chevron-up {
+  transform: rotate(180deg);
+}
+
+.select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 240px;
+  overflow-y: auto;
+  background-color: #18181B;
+  border: 1px solid #3F3F46;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  animation: select-fade-in 0.15s ease;
+}
+
+@keyframes select-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #D4D4D8;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.select-option-focused {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34D399;
+}
+
+.select-option:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34D399;
+}
+
+.select-option-selected {
+  color: #10B981;
+  font-weight: 600;
+}
+
+.select-error-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #F87171;
+}
