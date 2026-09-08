@@ -127,7 +127,7 @@ export function Button({
   text,
   icon: Icon,
   iconPosition = "left",
-  color = "#10B981",
+  color = "#3B82F6",
   outlineColor,
   variant = "solid",
   size = "md",
