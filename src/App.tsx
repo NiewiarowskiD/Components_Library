@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/Button/Button";
-import { Header } from "@/components/Header/Header";
 import { Text } from "@/components/Text/Text";
 import { CardPreview } from "@/components/Card/CardPreview";
 import { ButtonPreview } from "@/components/Button/ButtonPreview";
@@ -16,10 +15,14 @@ import { DataTablePreview } from "@/components/DataTable/DataTablePreview";
 import { ModalPreview } from "@/components/Modal/ModalPreview";
 import { ToastPreview } from "@/components/Toast/ToastPreview";
 import { ToastProvider } from "@/components/Toast/ToastProvider";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
+import { translations, type Language, type ExperienceItemData } from "@/i18n/translations";
 import {
   ArrowDown,
   ArrowUpRight,
+  BriefcaseBusiness,
   ChevronDown,
+  ChevronUp,
   Download,
   Github,
   LayoutGrid,
@@ -59,41 +62,44 @@ interface CategoryGroup {
   items: { id: ActiveView; label: string; icon: React.ElementType }[];
 }
 
-const categories: CategoryGroup[] = [
-  {
-    label: "Foundations",
-    items: [
-      { id: "card", label: "Card", icon: LayoutGrid },
-      { id: "button", label: "Button", icon: MousePointerClick },
-      { id: "header", label: "Header", icon: PanelTop },
-      { id: "text", label: "Text", icon: Type },
-    ],
-  },
-  {
-    label: "Forms & Inputs",
-    items: [
-      { id: "input", label: "Input", icon: TextCursorInput },
-      { id: "select", label: "Select", icon: ChevronDownSquare },
-      { id: "switch", label: "Switch", icon: ToggleLeft },
-    ],
-  },
-  {
-    label: "Data Display",
-    items: [
-      { id: "table", label: "Data Table", icon: Table },
-      { id: "accordion", label: "Accordion", icon: ChevronsDownUp },
-      { id: "badge", label: "Badge", icon: Tag },
-    ],
-  },
-  {
-    label: "Feedback & Overlays",
-    items: [
-      { id: "modal", label: "Modal", icon: SquareStack },
-      { id: "toast", label: "Toast", icon: Bell },
-      { id: "skeleton", label: "Skeleton", icon: Loader },
-    ],
-  },
-];
+function buildCategories(t: typeof translations["ENG"]): CategoryGroup[] {
+  const n = t.components.componentNames;
+  return [
+    {
+      label: t.components.categories.foundations,
+      items: [
+        { id: "card", label: n.card, icon: LayoutGrid },
+        { id: "button", label: n.button, icon: MousePointerClick },
+        { id: "header", label: n.header, icon: PanelTop },
+        { id: "text", label: n.text, icon: Type },
+      ],
+    },
+    {
+      label: t.components.categories.formsInputs,
+      items: [
+        { id: "input", label: n.input, icon: TextCursorInput },
+        { id: "select", label: n.select, icon: ChevronDownSquare },
+        { id: "switch", label: n.switch, icon: ToggleLeft },
+      ],
+    },
+    {
+      label: t.components.categories.dataDisplay,
+      items: [
+        { id: "table", label: n.table, icon: Table },
+        { id: "accordion", label: n.accordion, icon: ChevronsDownUp },
+        { id: "badge", label: n.badge, icon: Tag },
+      ],
+    },
+    {
+      label: t.components.categories.feedbackOverlays,
+      items: [
+        { id: "modal", label: n.modal, icon: SquareStack },
+        { id: "toast", label: n.toast, icon: Bell },
+        { id: "skeleton", label: n.skeleton, icon: Loader },
+      ],
+    },
+  ];
+}
 
 const technologies: TechLogo[] = [
   { name: "React", src: "/logos/react.svg" },
@@ -118,8 +124,13 @@ interface TechLogo {
 
 function App() {
   const [activeView, setActiveView] = useState<ActiveView>("card");
+  const [showExperience, setShowExperience] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [language, setLanguage] = useState<Language>("ENG");
   const heroRef = useRef<HTMLDivElement>(null);
+
+  const t = translations[language];
+  const categories = buildCategories(t);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -176,9 +187,14 @@ function App() {
             <span className="animate-dot-blink absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
           </span>
-          <span className="text-[10px] font-bold uppercase leading-none tracking-widest text-emerald-400">Open to</span>
-          <span className="mt-1 text-lg font-extrabold uppercase leading-none tracking-wider text-emerald-400">Work</span>
+          <span className="text-[10px] font-bold uppercase leading-none tracking-widest text-emerald-400">{t.nav.openTo}</span>
+          <span className="mt-1 text-lg font-extrabold uppercase leading-none tracking-wider text-emerald-400">{t.nav.work}</span>
         </a>
+
+        {/* Language switcher — top right */}
+        <div className="fixed top-5 right-5 z-50">
+          <LanguageSwitcher language={language} onChange={setLanguage} />
+        </div>
 
         <section className="relative min-h-screen flex items-center px-4 py-12 sm:py-16 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -191,7 +207,7 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
               <div>
                 <Text
-                  content="FRONTEND ENGINEER"
+                  content={t.hero.role}
                   color="#10B981"
                   size="sm"
                   weight="bold"
@@ -203,20 +219,29 @@ function App() {
                   <span className="block text-emerald-400">Niewiarowski</span>
                 </h1>
                 <p className="mt-7 max-w-2xl text-lg leading-relaxed text-zinc-400">
-                  I am a Frontend Engineer with experience in building scalable web applications and reusable UI component libraries. I specialize in React, Next.js, and Angular. I gained my experience working in international Agile teams for the Swiss agency Dreipol and in the banking sector (BNP Paribas).
+                  {t.hero.description}
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href="/documents/Daniel_Niewiarowski_Frontend_CV.pdf" download>
-                    <Button text="Download CV" icon={Download} color="#10B981" size="lg" rounded="lg" />
+                    <Button text={t.buttons.downloadCV} icon={Download} color="#10B981" size="lg" rounded="lg" />
                   </a>
                   <a href="mailto:daniel.niewiarowski@op.pl">
-                    <Button text="Contact me" icon={Mail} variant="outline" color="#E4E4E7" size="lg" rounded="lg" />
+                    <Button text={t.buttons.contactMe} icon={Mail} variant="outline" color="#E4E4E7" size="lg" rounded="lg" />
                   </a>
+                  <Button
+                    text={showExperience ? t.buttons.hideExperiences : t.buttons.myExperiences}
+                    icon={showExperience ? ChevronUp : BriefcaseBusiness}
+                    variant="outline"
+                    color="#10B981"
+                    size="lg"
+                    rounded="lg"
+                    onClick={() => setShowExperience((visible) => !visible)}
+                  />
                 </div>
 
                 <div className="mt-7 flex items-center gap-3">
-                  <span className="text-sm font-medium text-zinc-500">Connect</span>
+                  <span className="text-sm font-medium text-zinc-500">{t.connect}</span>
                   <a
                     href="https://www.linkedin.com/in/danielniewiarowski/"
                     target="_blank"
@@ -243,6 +268,29 @@ function App() {
                     <Mail size={18} />
                   </a>
                 </div>
+
+                <div
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${showExperience ? "mt-8 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}
+                  aria-hidden={!showExperience}
+                >
+                  <div className="rounded-2xl border border-zinc-700 bg-zinc-900/70 p-5 shadow-xl shadow-emerald-500/5">
+                    <div className="mb-5 flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+                        <BriefcaseBusiness size={20} />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold uppercase tracking-widest text-emerald-400">{t.experience.title}</div>
+                        <div className="mt-1 text-sm text-zinc-500">{t.experience.subtitle}</div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-5">
+                      {t.experience.items.map((item, i) => (
+                        <ExperienceItem key={i} item={item} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="flex justify-center lg:justify-end">
@@ -256,8 +304,8 @@ function App() {
                     />
                   </div>
                   <div className="absolute -bottom-5 -left-5 rounded-2xl bg-zinc-900 border border-zinc-700 px-5 py-4 text-zinc-100 shadow-xl">
-                    <div className="text-xs font-medium uppercase tracking-widest text-zinc-500">Based in</div>
-                    <div className="mt-1 text-base font-semibold text-emerald-400">Zurich, Switzerland</div>
+                    <div className="text-xs font-medium uppercase tracking-widest text-zinc-500">{t.basedIn}</div>
+                    <div className="mt-1 text-base font-semibold text-emerald-400">{t.location}</div>
                   </div>
                 </div>
               </div>
@@ -267,7 +315,7 @@ function App() {
             <div className="mt-16 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 items-center">
               <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500">
                 <span className="h-px w-8 bg-zinc-700" />
-                Core stack
+                {t.coreStack}
               </div>
               <div className="flex flex-wrap gap-4">
                 {technologies.map((tech) => (
@@ -285,7 +333,7 @@ function App() {
             <div className="mt-6 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 items-center">
               <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500">
                 <span className="h-px w-8 bg-zinc-700" />
-                Tools
+                {t.tools}
               </div>
               <div className="flex flex-wrap gap-4">
                 {tools.map((tool) => (
@@ -305,7 +353,7 @@ function App() {
               className="mx-auto mt-16 flex flex-col items-center gap-2 text-zinc-500 hover:text-emerald-400 transition-colors duration-300 group"
             >
               <Text
-                content="Scroll to explore"
+                content={t.scrollToExplore}
                 color="#71717A"
                 size="sm"
                 weight="medium"
@@ -321,13 +369,13 @@ function App() {
         <div ref={heroRef} className="py-16 px-4">
           <div className="max-w-5xl mx-auto">
             <header className="text-center mb-10">
-              <Text content="FEATURED WORK" color="#10B981" size="sm" weight="bold" align="center" uppercase letterSpacing="widest" />
-              <h2 className="mt-3 text-4xl font-bold text-zinc-100 mb-3">Reusable UI Components</h2>
+              <Text content={t.components.featuredWork} color="#10B981" size="sm" weight="bold" align="center" uppercase letterSpacing="widest" />
+              <h2 className="mt-3 text-4xl font-bold text-zinc-100 mb-3">{t.components.title}</h2>
               <p className="max-w-2xl mx-auto text-zinc-400 text-lg leading-relaxed">
-                A configurable component library built with React, TypeScript, Tailwind CSS and SCSS, focused on consistency, accessibility and speed.
+                {t.components.description}
               </p>
               <div className="mt-5 flex justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                <span>React</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>SCSS</span>
+                <span>{t.components.techStack}</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>SCSS</span>
               </div>
             </header>
 
@@ -360,8 +408,8 @@ function App() {
         <footer className="border-t border-zinc-800 bg-zinc-900/80 px-4 py-10">
           <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-5 text-center sm:flex-row sm:text-left">
             <div>
-              <div className="text-sm font-bold text-zinc-100">Daniel Niewiarowski</div>
-              <div className="mt-1 text-sm text-zinc-500">Frontend Engineer · Zurich, Switzerland</div>
+              <div className="text-sm font-bold text-zinc-100">{t.footer.name}</div>
+              <div className="mt-1 text-sm text-zinc-500">{t.footer.role}</div>
             </div>
             <a href="mailto:daniel.niewiarowski@op.pl" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300">
               daniel.niewiarowski@op.pl <ArrowUpRight size={16} />
@@ -374,6 +422,27 @@ function App() {
         </div>
       </div>
     </ToastProvider>
+  );
+}
+
+function ExperienceItem({ item }: { item: ExperienceItemData }) {
+  return (
+    <article className="relative border-l border-emerald-500/30 pl-4">
+      <div className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-emerald-400 ring-4 ring-zinc-900" />
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+        <h3 className="text-sm font-bold text-zinc-100">{item.role}</h3>
+        <span className="text-xs font-semibold uppercase tracking-wide text-emerald-400">{item.period}</span>
+      </div>
+      <div className="mt-1 text-xs font-medium text-zinc-500">{item.company}</div>
+      <ul className="mt-2 space-y-1.5">
+        {item.bullets.map((bullet, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-zinc-400">
+            <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-emerald-500/60" />
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
   );
 }
 
