@@ -274,9 +274,9 @@ export const translations: Record<Language, Translation> = {
   ENG: {
     nav: { openTo: "Open to", work: "Work" },
     hero: {
-      role: "FRONTEND ENGINEER",
+      role: "SOFTWARE ENGINEER",
       description:
-        "I am a Frontend Engineer with experience in building scalable web applications and reusable UI component libraries. I specialize in React, Next.js, and Angular. I gained my experience working in international Agile teams for the Swiss agency Dreipol and in the banking sector (BNP Paribas).",
+        "I am a Software Engineer with experience in building scalable web applications and reusable UI component libraries. I specialize in React, Next.js, and Angular. I gained my experience working in international Agile teams for the Dreipol and in the banking sector (BNP Paribas/UBS).",
     },
     buttons: {
       downloadCV: "CV",
