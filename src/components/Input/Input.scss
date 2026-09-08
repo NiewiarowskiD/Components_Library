@@ -8,6 +8,10 @@
 .input-label {
   font-size: 0.8125rem;
   font-weight: 600;
+  color: #27272A;
+}
+
+html.dark .input-label {
   color: #D4D4D8;
 }
 
@@ -22,21 +26,35 @@
   padding: 0.625rem 0.875rem;
   font-size: 0.875rem;
   font-family: inherit;
-  color: #E4E4E7;
-  background-color: #18181B;
-  border: 2px solid #3F3F46;
+  color: #18181B;
+  background-color: #FFFFFF;
+  border: 2px solid #E4E4E7;
   border-radius: 0.5rem;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+  &::placeholder {
+    color: #A1A1AA;
+  }
+
+  &:focus {
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    background-color: #FFFFFF;
+  }
+}
+
+html.dark .input-field {
+  color: #E4E4E7;
+  background-color: #18181B;
+  border-color: #3F3F46;
 
   &::placeholder {
     color: #71717A;
   }
 
   &:focus {
-    border-color: #10B981;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-  background-color: #18181B;
+    background-color: #18181B;
   }
 }
 
@@ -60,12 +78,20 @@
 .input-disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  background-color: #F4F4F5;
+}
+
+html.dark .input-disabled {
   background-color: #09090B;
 }
 
 .input-readonly {
-  background-color: #09090B;
+  background-color: #F4F4F5;
   cursor: default;
+}
+
+html.dark .input-readonly {
+  background-color: #09090B;
 }
 
 .input-icon {
@@ -73,8 +99,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #71717A;
+  color: #A1A1AA;
   pointer-events: none;
+}
+
+html.dark .input-icon {
+  color: #71717A;
 }
 
 .input-icon-left {
@@ -88,5 +118,9 @@
 .input-error-text {
   font-size: 0.75rem;
   font-weight: 500;
+  color: #EF4444;
+}
+
+html.dark .input-error-text {
   color: #F87171;
 }

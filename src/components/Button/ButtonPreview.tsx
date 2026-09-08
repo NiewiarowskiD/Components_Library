@@ -20,10 +20,10 @@ function Section({
 }) {
   return (
     <div className="mb-8">
-      <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-4">
+      <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-500 uppercase tracking-wide mb-4">
         {title}
       </h2>
-      <div className="flex flex-wrap gap-3 items-stretch bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-700 p-6">
+      <div className="flex flex-wrap gap-3 items-stretch bg-white dark:bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 p-6">
         {children}
       </div>
     </div>
@@ -95,11 +95,11 @@ export function ButtonPreview() {
       </Section>
 
       {log.length > 0 && (
-        <div className="mt-10 bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-700 p-6">
-          <h2 className="text-lg font-bold text-zinc-100 mb-4">Click Activity</h2>
+        <div className="mt-10 bg-white dark:bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 p-6">
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-4">Click Activity</h2>
           <div className="space-y-2">
             {log.map((entry, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm text-zinc-300 bg-zinc-900/60 rounded-lg px-4 py-2">
+              <div key={i} className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-900/60 rounded-lg px-4 py-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
                 {entry}
               </div>

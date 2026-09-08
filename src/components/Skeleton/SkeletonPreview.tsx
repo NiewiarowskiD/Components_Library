@@ -13,7 +13,7 @@ function Section({
       <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-4">
         {title}
       </h2>
-      <div className="flex flex-wrap gap-4 items-stretch bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-700 p-6">
+      <div className="flex flex-wrap gap-4 items-stretch bg-white dark:bg-zinc-800/80 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 p-6">
         {children}
       </div>
     </div>
@@ -35,7 +35,7 @@ export function SkeletonPreview() {
       </Section>
 
       <Section title="Skeleton — Card Placeholder">
-        <div className="w-full max-w-xs rounded-xl border border-zinc-700 bg-zinc-900/60 p-5">
+        <div className="w-full max-w-xs rounded-xl border border-zinc-200 bg-zinc-50 p-5 dark:border-zinc-700 dark:bg-zinc-900/60">
           <div className="flex items-center gap-3">
             <Skeleton variant="circle" width="48px" height="48px" />
             <div className="flex-1">

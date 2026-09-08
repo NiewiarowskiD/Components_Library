@@ -29,7 +29,9 @@ import {
   Linkedin,
   Mail,
   MousePointerClick,
+  Moon,
   PanelTop,
+  Sun,
   Type,
   Tag,
   ToggleLeft,
@@ -122,15 +124,23 @@ interface TechLogo {
   src: string;
 }
 
+type Theme = "light" | "dark";
+
 function App() {
   const [activeView, setActiveView] = useState<ActiveView>("card");
   const [showExperience, setShowExperience] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [language, setLanguage] = useState<Language>("ENG");
+  const [theme, setTheme] = useState<Theme>("dark");
   const heroRef = useRef<HTMLDivElement>(null);
 
   const t = translations[language];
   const categories = buildCategories(t);
+  const isDark = theme === "dark";
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -177,22 +187,30 @@ function App() {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950">
+      <div className={`min-h-screen ${isDark ? "bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950" : "bg-gradient-to-br from-zinc-100 via-white to-zinc-100"}`}>
         {/* Open to Work — floating circular badge */}
         <a
           href="mailto:daniel.niewiarowski@op.pl"
-          className="animate-open-to-work group fixed top-5 left-5 z-50 flex h-24 w-24 flex-col items-center justify-center rounded-full border border-emerald-500/40 bg-zinc-900/90 backdrop-blur-md transition-all duration-300 hover:border-emerald-400 hover:bg-zinc-800/90"
+          className="animate-open-to-work group fixed top-5 left-5 z-50 flex h-24 w-24 flex-col items-center justify-center rounded-full border border-emerald-500/40 bg-white/90 backdrop-blur-md transition-all duration-300 hover:border-emerald-400 hover:bg-zinc-50 dark:bg-zinc-900/90 dark:hover:bg-zinc-800/90"
         >
           <span className="relative mb-1 flex h-2.5 w-2.5 flex-shrink-0">
             <span className="animate-dot-blink absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
           </span>
-          <span className="text-[10px] font-bold uppercase leading-none tracking-widest text-emerald-400">{t.nav.openTo}</span>
-          <span className="mt-1 text-lg font-extrabold uppercase leading-none tracking-wider text-emerald-400">{t.nav.work}</span>
+          <span className="text-[10px] font-bold uppercase leading-none tracking-widest text-emerald-500">{t.nav.openTo}</span>
+          <span className="mt-1 text-lg font-extrabold uppercase leading-none tracking-wider text-emerald-500">{t.nav.work}</span>
         </a>
 
         {/* Language switcher — top right */}
-        <div className="fixed top-5 right-5 z-50">
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            aria-label="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-emerald-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 dark:hover:text-emerald-400"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
           <LanguageSwitcher language={language} onChange={setLanguage} />
         </div>
 
@@ -208,32 +226,32 @@ function App() {
               <div>
                 <Text
                   content={t.hero.role}
-                  color="#10B981"
+                  color="#059669"
                   size="sm"
                   weight="bold"
                   uppercase
                   letterSpacing="widest"
                 />
-                <h1 className="mt-4 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none text-zinc-100">
+                <h1 className={`mt-4 text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>
                   Daniel
-                  <span className="block text-emerald-400">Niewiarowski</span>
+                  <span className="block text-emerald-500">Niewiarowski</span>
                 </h1>
-                <p className="mt-7 max-w-2xl text-lg leading-relaxed text-zinc-400">
+                <p className={`mt-7 max-w-2xl text-lg leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
                   {t.hero.description}
                 </p>
 
                 <div className="mt-8 flex flex-nowrap gap-3">
                   <a href="/documents/Daniel_Niewiarowski_Frontend_CV.pdf" download>
-                    <Button text={t.buttons.downloadCV} icon={Download} color="#10B981" size="lg" rounded="lg" />
+                    <Button text={t.buttons.downloadCV} icon={Download} color="#059669" size="lg" rounded="lg" />
                   </a>
                   <a href="mailto:daniel.niewiarowski@op.pl">
-                    <Button text={t.buttons.contactMe} icon={Mail} variant="outline" color="#E4E4E7" size="lg" rounded="lg" />
+                    <Button text={t.buttons.contactMe} icon={Mail} variant="outline" color={isDark ? "#E4E4E7" : "#27272A"} size="lg" rounded="lg" />
                   </a>
                   <Button
                     text={showExperience ? t.buttons.hideExperiences : t.buttons.myExperiences}
                     icon={showExperience ? ChevronUp : BriefcaseBusiness}
                     variant="outline"
-                    color="#10B981"
+                    color="#059669"
                     size="lg"
                     rounded="lg"
                     onClick={() => setShowExperience((visible) => !visible)}
@@ -241,13 +259,13 @@ function App() {
                 </div>
 
                 <div className="mt-7 flex items-center gap-3">
-                  <span className="text-sm font-medium text-zinc-500">{t.connect}</span>
+                  <span className={`text-sm font-medium ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{t.connect}</span>
                   <a
                     href="https://www.linkedin.com/in/danielniewiarowski/"
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Daniel Niewiarowski on LinkedIn"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700 transition-colors hover:bg-emerald-500 hover:text-zinc-950 hover:border-emerald-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
                   >
                     <Linkedin size={18} />
                   </a>
@@ -256,14 +274,14 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="GitHub"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700 transition-colors hover:bg-emerald-500 hover:text-zinc-950 hover:border-emerald-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
                   >
                     <Github size={18} />
                   </a>
                   <a
                     href="mailto:daniel.niewiarowski@op.pl"
                     aria-label="Send email to Daniel Niewiarowski"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700 transition-colors hover:bg-emerald-500 hover:text-zinc-950 hover:border-emerald-500"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
                   >
                     <Mail size={18} />
                   </a>
@@ -273,20 +291,20 @@ function App() {
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${showExperience ? "mt-8 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}
                   aria-hidden={!showExperience}
                 >
-                  <div className="rounded-2xl border border-zinc-700 bg-zinc-900/70 p-5 shadow-xl shadow-emerald-500/5">
+                  <div className={`rounded-2xl border p-5 shadow-xl shadow-emerald-500/5 ${isDark ? "border-zinc-700 bg-zinc-900/70" : "border-zinc-200 bg-white"}`}>
                     <div className="mb-5 flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500">
                         <BriefcaseBusiness size={20} />
                       </div>
                       <div>
-                        <div className="text-xs font-semibold uppercase tracking-widest text-emerald-400">{t.experience.title}</div>
-                        <div className="mt-1 text-sm text-zinc-500">{t.experience.subtitle}</div>
+                        <div className="text-xs font-semibold uppercase tracking-widest text-emerald-500">{t.experience.title}</div>
+                        <div className={`mt-1 text-sm ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{t.experience.subtitle}</div>
                       </div>
                     </div>
 
                     <div className="space-y-5">
                       {t.experience.items.map((item, i) => (
-                        <ExperienceItem key={i} item={item} />
+                        <ExperienceItem key={i} item={item} isDark={isDark} />
                       ))}
                     </div>
                   </div>
@@ -296,16 +314,16 @@ function App() {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-sm">
                   <div className="absolute -inset-3 rounded-[2rem] bg-emerald-500/10 rotate-3" />
-                  <div className="relative overflow-hidden rounded-[2rem] border-4 border-zinc-800 bg-zinc-800 shadow-2xl shadow-emerald-500/10">
+                  <div className={`relative overflow-hidden rounded-[2rem] border-4 shadow-2xl shadow-emerald-500/10 ${isDark ? "border-zinc-800 bg-zinc-800" : "border-zinc-200 bg-zinc-100"}`}>
                     <img
                       src="/images/image.png"
                       alt="Daniel Niewiarowski"
                       className="aspect-[4/5] w-full object-cover object-top"
                     />
                   </div>
-                  <div className="absolute -bottom-5 -left-5 rounded-2xl bg-zinc-900 border border-zinc-700 px-5 py-4 text-zinc-100 shadow-xl">
-                    <div className="text-xs font-medium uppercase tracking-widest text-zinc-500">{t.basedIn}</div>
-                    <div className="mt-1 text-base font-semibold text-emerald-400">{t.location}</div>
+                  <div className={`absolute -bottom-5 -left-5 rounded-2xl border px-5 py-4 shadow-xl ${isDark ? "bg-zinc-900 border-zinc-700 text-zinc-100" : "bg-white border-zinc-200 text-zinc-900"}`}>
+                    <div className={`text-xs font-medium uppercase tracking-widest ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{t.basedIn}</div>
+                    <div className="mt-1 text-base font-semibold text-emerald-500">{t.location}</div>
                   </div>
                 </div>
               </div>
@@ -314,27 +332,27 @@ function App() {
             {/* Core stack & Tools — one horizontal row */}
             <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-6">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500 whitespace-nowrap">
-                  <span className="h-px w-8 bg-zinc-700" />
+                <div className={`flex items-center gap-3 text-sm font-semibold whitespace-nowrap ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>
+                  <span className={`h-px w-8 ${isDark ? "bg-zinc-700" : "bg-zinc-300"}`} />
                   {t.coreStack}
                 </div>
                 <div className="flex flex-nowrap gap-3">
                   {technologies.map((tech) => (
-                    <TechLogoCard key={tech.name} tech={tech} />
+                    <TechLogoCard key={tech.name} tech={tech} isDark={isDark} />
                   ))}
                 </div>
               </div>
 
-              <span className="hidden h-14 w-px bg-zinc-800 lg:block" />
+              <span className={`hidden h-14 w-px lg:block ${isDark ? "bg-zinc-800" : "bg-zinc-200"}`} />
 
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500 whitespace-nowrap">
-                  <span className="h-px w-8 bg-zinc-700" />
+                <div className={`flex items-center gap-3 text-sm font-semibold whitespace-nowrap ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>
+                  <span className={`h-px w-8 ${isDark ? "bg-zinc-700" : "bg-zinc-300"}`} />
                   {t.tools}
                 </div>
                 <div className="flex flex-nowrap gap-3">
                   {tools.map((tool) => (
-                    <TechLogoCard key={tool.name} tech={tool} />
+                    <TechLogoCard key={tool.name} tech={tool} isDark={isDark} />
                   ))}
                 </div>
               </div>
@@ -343,7 +361,7 @@ function App() {
             <button
               type="button"
               onClick={scrollToComponents}
-              className="mx-auto mt-16 flex flex-col items-center gap-2 text-zinc-500 hover:text-emerald-400 transition-colors duration-300 group"
+              className={`mx-auto mt-16 flex flex-col items-center gap-2 transition-colors duration-300 group ${isDark ? "text-zinc-500 hover:text-emerald-400" : "text-zinc-500 hover:text-emerald-600"}`}
             >
               <Text
                 content={t.scrollToExplore}
@@ -354,7 +372,7 @@ function App() {
                 uppercase
                 letterSpacing="wide"
               />
-              <ChevronDown size={32} strokeWidth={1.5} className="animate-bounce group-hover:text-emerald-400" />
+              <ChevronDown size={32} strokeWidth={1.5} className="animate-bounce group-hover:text-emerald-500" />
             </button>
           </div>
         </section>
@@ -362,12 +380,12 @@ function App() {
         <div ref={heroRef} className="py-16 px-4">
           <div className="max-w-5xl mx-auto">
             <header className="text-center mb-10">
-              <Text content={t.components.featuredWork} color="#10B981" size="sm" weight="bold" align="center" uppercase letterSpacing="widest" />
-              <h2 className="mt-3 text-4xl font-bold text-zinc-100 mb-3">{t.components.title}</h2>
-              <p className="max-w-2xl mx-auto text-zinc-400 text-lg leading-relaxed">
+              <Text content={t.components.featuredWork} color="#059669" size="sm" weight="bold" align="center" uppercase letterSpacing="widest" />
+              <h2 className={`mt-3 text-4xl font-bold mb-3 ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>{t.components.title}</h2>
+              <p className={`max-w-2xl mx-auto text-lg leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
                 {t.components.description}
               </p>
-              <div className="mt-5 flex justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              <div className={`mt-5 flex justify-center gap-2 text-xs font-semibold uppercase tracking-wider ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>
                 <span>{t.components.techStack}</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>SCSS</span>
               </div>
             </header>
@@ -376,7 +394,7 @@ function App() {
             <div className="mb-10 space-y-4">
               {categories.map((cat) => (
                 <div key={cat.label}>
-                  <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-600 mb-2 px-1">
+                  <h3 className={`text-xs font-bold uppercase tracking-widest mb-2 px-1 ${isDark ? "text-zinc-600" : "text-zinc-400"}`}>
                     {cat.label}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
@@ -387,6 +405,7 @@ function App() {
                         onClick={() => setActiveView(item.id)}
                         icon={item.icon}
                         label={item.label}
+                        isDark={isDark}
                       />
                     ))}
                   </div>
@@ -398,49 +417,49 @@ function App() {
           </div>
         </div>
 
-        <footer className="border-t border-zinc-800 bg-zinc-900/80 px-4 py-10">
+        <footer className={`border-t px-4 py-10 ${isDark ? "border-zinc-800 bg-zinc-900/80" : "border-zinc-200 bg-zinc-50"}`}>
           <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-5 text-center sm:flex-row sm:text-left">
             <div>
-              <div className="text-sm font-bold text-zinc-100">{t.footer.name}</div>
-              <div className="mt-1 text-sm text-zinc-500">{t.footer.role}</div>
+              <div className={`text-sm font-bold ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>{t.footer.name}</div>
+              <div className={`mt-1 text-sm ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{t.footer.role}</div>
             </div>
-            <a href="mailto:daniel.niewiarowski@op.pl" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300">
+            <a href="mailto:daniel.niewiarowski@op.pl" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-500 hover:text-emerald-600">
               daniel.niewiarowski@op.pl <ArrowUpRight size={16} />
             </a>
           </div>
         </footer>
 
         <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 transition-opacity duration-500 pointer-events-none ${scrolled ? "opacity-0" : "opacity-100"}`}>
-          <ArrowDown size={16} className="text-zinc-600" />
+          <ArrowDown size={16} className={isDark ? "text-zinc-600" : "text-zinc-400"} />
         </div>
       </div>
     </ToastProvider>
   );
 }
 
-function TechLogoCard({ tech }: { tech: TechLogo }) {
+function TechLogoCard({ tech, isDark }: { tech: TechLogo; isDark: boolean }) {
   return (
     <div className="group flex flex-col items-center gap-2">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-zinc-700 bg-zinc-800/80 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/50">
+      <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/50 ${isDark ? "border-zinc-700 bg-zinc-800/80" : "border-zinc-200 bg-white"}`}>
         <img src={tech.src} alt={`${tech.name} logo`} className="h-8 w-8" />
       </div>
-      <span className="text-xs font-semibold text-zinc-400">{tech.name}</span>
+      <span className={`text-xs font-semibold ${isDark ? "text-zinc-400" : "text-zinc-500"}`}>{tech.name}</span>
     </div>
   );
 }
 
-function ExperienceItem({ item }: { item: ExperienceItemData }) {
+function ExperienceItem({ item, isDark }: { item: ExperienceItemData; isDark: boolean }) {
   return (
     <article className="relative border-l border-emerald-500/30 pl-4">
-      <div className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-emerald-400 ring-4 ring-zinc-900" />
+      <div className={`absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-emerald-500 ring-4 ${isDark ? "ring-zinc-900" : "ring-white"}`} />
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-        <h3 className="text-sm font-bold text-zinc-100">{item.role}</h3>
-        <span className="text-xs font-semibold uppercase tracking-wide text-emerald-400">{item.period}</span>
+        <h3 className={`text-sm font-bold ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>{item.role}</h3>
+        <span className="text-xs font-semibold uppercase tracking-wide text-emerald-500">{item.period}</span>
       </div>
-      <div className="mt-1 text-xs font-medium text-zinc-500">{item.company}</div>
+      <div className={`mt-1 text-xs font-medium ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{item.company}</div>
       <ul className="mt-2 space-y-1.5">
         {item.bullets.map((bullet, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-zinc-400">
+          <li key={i} className={`flex items-start gap-2 text-sm leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
             <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-emerald-500/60" />
             <span>{bullet}</span>
           </li>
@@ -455,17 +474,19 @@ function ToggleButton({
   onClick,
   icon: Icon,
   label,
+  isDark,
 }: {
   active: boolean;
   onClick: () => void;
   icon: React.ElementType;
   label: string;
+  isDark: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${active ? "bg-emerald-500 text-zinc-950 shadow-sm shadow-emerald-500/30" : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700/50 border border-zinc-700/50"}`}
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${active ? "bg-emerald-500 text-white shadow-sm shadow-emerald-500/30" : isDark ? "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700/50 border border-zinc-700/50" : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-zinc-200"}`}
     >
       <Icon size={16} strokeWidth={2} />
       {label}

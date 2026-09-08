@@ -27,10 +27,11 @@ A personal portfolio and reusable UI component library built with **React**, **T
 | Styling | Tailwind CSS 3, SCSS |
 | Icons | Lucide React |
 | Build Tool | Vite 5 |
-| Backend | Bolt Database (provisioned, ready for data persistence) |
+| Backend | Supabase (provisioned, ready for data persistence) |
 
 ## Project Structure
 
+```
 src/
 ├── components/
 │   ├── Accordion/          # Expandable content panels
@@ -54,8 +55,7 @@ src/
 ├── App.tsx                  # Main application
 ├── main.tsx                 # Entry point
 └── index.css                # Global styles
-
-
+```
 
 Each component folder follows a consistent pattern:
 
@@ -75,53 +75,74 @@ Each component folder follows a consistent pattern:
 
 ```bash
 npm install
-Development
+```
 
+### Development
+
+```bash
 npm run dev
+```
+
 The dev server starts automatically in this environment — no need to launch it manually.
 
-Build
+### Build
 
+```bash
 npm run build
-Type Checking
+```
 
+### Type Checking
+
+```bash
 npm run typecheck
-Lint
+```
 
+### Lint
+
+```bash
 npm run lint
-Components Overview
-Component	Key Props	Description
-Button	text, icon, variant, color, size, rounded	Solid or outline button with customizable appearance
-Card	—	Flexible content container with header, body, and footer slots
-Header	—	Configurable page header
-Text	content, color, size, weight, align, uppercase	Typography primitive
-Input	—	Text input with label and validation states
-Select	—	Dropdown select with options
-Switch	—	Toggle switch
-Badge	—	Status and category badges
-Accordion	—	Collapsible content sections
-DataTable	—	Sortable, paginated data grid
-Modal	—	Dialog overlay with backdrop
-Toast	—	Auto-dismissing notifications (via ToastProvider)
-Skeleton	—	Animated loading placeholders
-Internationalization
+```
+
+## Components Overview
+
+| Component | Key Props | Description |
+| --- | --- | --- |
+| Button | `text`, `icon`, `variant`, `color`, `size`, `rounded` | Solid or outline button with customizable appearance |
+| Card | — | Flexible content container with header, body, and footer slots |
+| Header | — | Configurable page header |
+| Text | `content`, `color`, `size`, `weight`, `align`, `uppercase` | Typography primitive |
+| Input | — | Text input with label and validation states |
+| Select | — | Dropdown select with options |
+| Switch | — | Toggle switch |
+| Badge | — | Status and category badges |
+| Accordion | — | Collapsible content sections |
+| DataTable | — | Sortable, paginated data grid |
+| Modal | — | Dialog overlay with backdrop |
+| Toast | — | Auto-dismissing notifications (via ToastProvider) |
+| Skeleton | — | Animated loading placeholders |
+
+## Internationalization
+
 The app supports three languages out of the box:
 
-ENG — English (default)
-PL — Polski
-DE — Deutsch
-All translations live in src/i18n/translations.ts. To add a new language, extend the Language type and add a new entry to the translations record.
+- **ENG** — English (default)
+- **PL** — Polski
+- **DE** — Deutsch
 
-Deployment
-The project is configured for deployment on Vercel. The build output in dist/ is static and can be served by any static host.
+All translations live in `src/i18n/translations.ts`. To add a new language, extend the `Language` type and add a new entry to the `translations` record.
 
-Live deployment: 
-https://components-library-git-main-daniel-niewiarowski.vercel.app/
+## Deployment
 
+The project is configured for deployment on Vercel. The build output in `dist/` is static and can be served by any static host.
 
-Contact
-Email: daniel.niewiarowski@op.pl
-LinkedIn: danielniewiarowski
-Location: Zurich, Switzerland
-License
+**Live deployment:** [https://components-library-git-main-daniel-niewiarowski.vercel.app/](https://components-library-git-main-daniel-niewiarowski.vercel.app/)
+
+## Contact
+
+- **Email**: daniel.niewiarowski@op.pl
+- **LinkedIn**: [danielniewiarowski](https://www.linkedin.com/in/danielniewiarowski/)
+- **Location**: Zurich, Switzerland
+
+## License
+
 This project is a personal portfolio. All rights reserved.

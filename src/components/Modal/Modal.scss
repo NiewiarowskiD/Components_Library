@@ -6,9 +6,13 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   animation: modal-overlay-in 0.2s ease;
+}
+
+html.dark .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 @keyframes modal-overlay-in {
@@ -21,15 +25,21 @@
 }
 
 .modal-content {
-  background-color: #18181B;
-  border: 1px solid #3F3F46;
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E7;
   border-radius: 0.75rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   outline: none;
   animation: modal-content-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.dark .modal-content {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes modal-content-in {
@@ -68,14 +78,22 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid #27272A;
+  border-bottom: 1px solid #E4E4E7;
+}
+
+html.dark .modal-header {
+  border-bottom-color: #27272A;
 }
 
 .modal-title {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #E4E4E7;
+  color: #18181B;
   margin: 0;
+}
+
+html.dark .modal-title {
+  color: #E4E4E7;
 }
 
 .modal-close-btn {
@@ -94,7 +112,7 @@
 
   &:hover {
     background-color: rgba(239, 68, 68, 0.15);
-    color: #F87171;
+    color: #EF4444;
   }
 
   &:focus-visible {
@@ -103,12 +121,20 @@
   }
 }
 
+html.dark .modal-close-btn:hover {
+  color: #F87171;
+}
+
 .modal-body {
   padding: 1.5rem;
   overflow-y: auto;
-  color: #A1A1AA;
+  color: #52525B;
   font-size: 0.875rem;
   line-height: 1.6;
+}
+
+html.dark .modal-body {
+  color: #A1A1AA;
 }
 
 .modal-footer {
@@ -117,5 +143,9 @@
   justify-content: flex-end;
   gap: 0.625rem;
   padding: 1rem 1.5rem;
-  border-top: 1px solid #27272A;
+  border-top: 1px solid #E4E4E7;
+}
+
+html.dark .modal-footer {
+  border-top-color: #27272A;
 }
