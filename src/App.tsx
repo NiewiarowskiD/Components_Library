@@ -155,13 +155,13 @@ function App() {
   const renderActiveView = () => {
     switch (activeView) {
       case "card":
-        return <CardPreview />;
+        return <CardPreview isDark={isDark} />;
       case "button":
-        return <ButtonPreview />;
+        return <ButtonPreview isDark={isDark} />;
       case "header":
-        return <HeaderPreview />;
+        return <HeaderPreview isDark={isDark} />;
       case "text":
-        return <TextPreview />;
+        return <TextPreview isDark={isDark} />;
       case "badge":
         return <BadgePreview />;
       case "switch":

@@ -30,7 +30,7 @@ function Section({
   );
 }
 
-export function ButtonPreview() {
+export function ButtonPreview({ isDark = true }: { isDark?: boolean }) {
   const [log, setLog] = useState<string[]>([]);
 
   const handleClick = (data: { name?: string; timestamp: number }) => {
@@ -48,7 +48,7 @@ export function ButtonPreview() {
         <Button text="Success" color="#22c55e" name="success" onClick={handleClick} />
         <Button text="Warning" color="#f59e0b" name="warning" onClick={handleClick} />
         <Button text="Danger" color="#ef4444" name="danger" onClick={handleClick} />
-        <Button text="Dark" color="#18181B" name="dark" onClick={handleClick} />
+        <Button text="Dark" color={isDark ? "#18181B" : "#27272A"} name="dark" onClick={handleClick} />
         <Button text="Light" color="#E4E4E7" name="light" onClick={handleClick} />
       </Section>
 

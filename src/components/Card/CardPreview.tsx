@@ -29,15 +29,22 @@ function Section({
   );
 }
 
-export function CardPreview() {
+export function CardPreview({ isDark = true }: { isDark?: boolean }) {
+  const darkBg = isDark ? "#18181B" : "#FFFFFF";
+  const darkerBg = isDark ? "#09090B" : "#F4F4F5";
+  const midBg = isDark ? "#27272A" : "#E4E4E7";
+  const darkBorder = isDark ? "#27272A" : "#D4D4D8";
+  const midBorder = isDark ? "#3F3F46" : "#A1A1AA";
+  const darkText = isDark ? undefined : "#27272A";
+
   return (
     <div>
       <Section title="Cards — Basic with Title & Close">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          <Card title="My First Card" color="#18181B" borderColor="#27272A">
+          <Card title="My First Card" color={darkBg} borderColor={darkBorder}>
             <p className="text-sm">You can put any content here — text, images, or other components.</p>
           </Card>
-          <Card title="Dark Card" color="#09090B" borderColor="#27272A">
+          <Card title="Dark Card" color={darkerBg} borderColor={darkBorder}>
             <p className="text-sm">This card has a dark background with automatically contrasting text.</p>
           </Card>
         </div>
@@ -59,13 +66,13 @@ export function CardPreview() {
 
       <Section title="Cards — Title Icons">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-          <Card title="Trending" titleIcon={TrendingUp} color="#18181B" borderColor="#27272A">
+          <Card title="Trending" titleIcon={TrendingUp} color={darkBg} borderColor={darkBorder}>
             <p className="text-sm">Add an icon next to the title for extra context.</p>
           </Card>
-          <Card title="Starred" titleIcon={Star} color="#27272A" borderColor="#3F3F46">
+          <Card title="Starred" titleIcon={Star} color={midBg} borderColor={midBorder}>
             <p className="text-sm">Any lucide-react icon can be used as the title icon.</p>
           </Card>
-          <Card title="Document" titleIcon={FileText} color="#09090B" borderColor="#27272A">
+          <Card title="Document" titleIcon={FileText} color={darkerBg} borderColor={darkBorder}>
             <p className="text-sm">Text color auto-adjusts to the background.</p>
           </Card>
         </div>
@@ -76,8 +83,8 @@ export function CardPreview() {
           <Card
             title="Mountain View"
             titleIcon={ImageIcon}
-            color="#18181B"
-            borderColor="#27272A"
+            color={darkBg}
+            borderColor={darkBorder}
             image="https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=600"
             imageAlt="Mountain landscape"
             imageHeight="h-44"
@@ -87,8 +94,8 @@ export function CardPreview() {
           <Card
             title="Ocean Sunset"
             titleIcon={ImageIcon}
-            color="#18181B"
-            borderColor="#27272A"
+            color={darkBg}
+            borderColor={darkBorder}
             image="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=600"
             imageAlt="Ocean sunset"
             imageHeight="h-44"
@@ -101,13 +108,13 @@ export function CardPreview() {
 
       <Section title="Cards — Roundness Levels">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-          <Card title="No Round" rounded="none" color="#18181B" borderColor="#27272A">
+          <Card title="No Round" rounded="none" color={darkBg} borderColor={darkBorder}>
             <p className="text-sm">Sharp corners.</p>
           </Card>
-          <Card title="Medium" rounded="md" color="#18181B" borderColor="#27272A">
+          <Card title="Medium" rounded="md" color={darkBg} borderColor={darkBorder}>
             <p className="text-sm">Medium rounding.</p>
           </Card>
-          <Card title="Extra Large" rounded="xl" color="#18181B" borderColor="#27272A">
+          <Card title="Extra Large" rounded="xl" color={darkBg} borderColor={darkBorder}>
             <p className="text-sm">Very rounded corners.</p>
           </Card>
         </div>
@@ -115,7 +122,7 @@ export function CardPreview() {
 
       <Section title="Cards — With Buttons Inside">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          <Card title="Action Card" titleIcon={Bell} color="#18181B" borderColor="#27272A" shadow="lg">
+          <Card title="Action Card" titleIcon={Bell} color={darkBg} borderColor={darkBorder} shadow="lg">
             <p className="text-sm mb-3">You can place buttons or any other content inside a card.</p>
             <Button text="Subscribe" icon={Bell} color="#10B981" size="sm" name="subscribe" />
           </Card>
@@ -128,7 +135,7 @@ export function CardPreview() {
 
       <Section title="Cards — Non-Closable">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          <Card title="Persistent" closable={false} color="#18181B" borderColor="#27272A">
+          <Card title="Persistent" closable={false} color={darkBg} borderColor={darkBorder}>
             <p className="text-sm">This card has no close button — it stays visible permanently.</p>
           </Card>
           <Card title="Always Visible" closable={false} color="#10B981" borderColor="#059669">
