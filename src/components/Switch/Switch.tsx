@@ -21,7 +21,9 @@ export function Switch({
   className = "",
 }: SwitchProps) {
   const sizeClass = `switch-${size}`;
-  const dotSize = size === "sm" ? "1rem" : size === "lg" ? "1.75rem" : "1.375rem";
+  const thumbSize = size === "sm" ? 16 : size === "lg" ? 28 : 22;
+  const trackWidth = size === "sm" ? 36 : size === "lg" ? 56 : 46;
+  const thumbOffset = trackWidth - thumbSize - 4;
 
   const handleClick = () => {
     if (!disabled) onChange(!checked);
@@ -61,9 +63,8 @@ export function Switch({
         <span
           className="switch-thumb"
           style={{
-            transform: checked
-              ? `translateX(calc(100% - ${dotSize} + 2px))`
-              : "translateX(2px)",
+            top: `calc(50% - ${thumbSize / 2}px)`,
+            transform: `translateX(${checked ? thumbOffset : 2}px)`,
           }}
         />
       </button>
