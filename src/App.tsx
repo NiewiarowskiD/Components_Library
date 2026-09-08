@@ -191,14 +191,10 @@ function App() {
         {/* Open to Work — floating circular badge */}
         <a
           href="mailto:daniel.niewiarowski@op.pl"
-          className="animate-open-to-work group fixed top-5 left-5 z-50 flex h-24 w-24 flex-col items-center justify-center rounded-full border border-emerald-500/40 bg-white/90 backdrop-blur-md transition-all duration-300 hover:border-emerald-400 hover:bg-zinc-50 dark:bg-zinc-900/90 dark:hover:bg-zinc-800/90"
+          className="animate-open-to-work group fixed top-5 left-5 z-50 flex h-24 w-24 flex-col items-center justify-center rounded-full border border-zinc-200 bg-zinc-100/95 text-zinc-800 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-emerald-400 hover:bg-white dark:border-zinc-300 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
         >
-          <span className="relative mb-1 flex h-2.5 w-2.5 flex-shrink-0">
-            <span className="animate-dot-blink absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
-          </span>
-          <span className="text-[10px] font-bold uppercase leading-none tracking-widest text-emerald-500">{t.nav.openTo}</span>
-          <span className="mt-1 text-lg font-extrabold uppercase leading-none tracking-wider text-emerald-500">{t.nav.work}</span>
+          <span className="text-[10px] font-bold uppercase leading-none tracking-widest">{t.nav.openTo}</span>
+          <span className="mt-1 text-lg font-extrabold uppercase leading-none tracking-wider text-zinc-900">{t.nav.work}</span>
         </a>
 
         {/* Language switcher — top right */}
@@ -258,35 +254,6 @@ function App() {
                   />
                 </div>
 
-                <div className="mt-7 flex items-center gap-3">
-                  <span className={`text-sm font-medium ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{t.connect}</span>
-                  <a
-                    href="https://www.linkedin.com/in/danielniewiarowski/"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Daniel Niewiarowski on LinkedIn"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
-                  >
-                    <Linkedin size={18} />
-                  </a>
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="GitHub"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
-                  >
-                    <Github size={18} />
-                  </a>
-                  <a
-                    href="mailto:daniel.niewiarowski@op.pl"
-                    aria-label="Send email to Daniel Niewiarowski"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
-                  >
-                    <Mail size={18} />
-                  </a>
-                </div>
-
                 <div
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${showExperience ? "mt-8 max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}
                   aria-hidden={!showExperience}
@@ -330,7 +297,7 @@ function App() {
             </div>
 
             {/* Core stack & Tools — one horizontal row */}
-            <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-6">
+            <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-6">
               <div className="flex items-center gap-4">
                 <div className={`flex items-center gap-3 text-sm font-semibold whitespace-nowrap ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>
                   <span className={`h-px w-8 ${isDark ? "bg-zinc-700" : "bg-zinc-300"}`} />
@@ -355,6 +322,38 @@ function App() {
                     <TechLogoCard key={tool.name} tech={tool} isDark={isDark} />
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Connect — centered below Core Stack & Tools */}
+            <div className="mt-10 flex flex-col items-center gap-3">
+              <span className={`text-sm font-medium ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>{t.connect}</span>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://www.linkedin.com/in/danielniewiarowski/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Daniel Niewiarowski on LinkedIn"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
+                >
+                  <Linkedin size={18} />
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
+                >
+                  <Github size={18} />
+                </a>
+                <a
+                  href="mailto:daniel.niewiarowski@op.pl"
+                  aria-label="Send email to Daniel Niewiarowski"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-zinc-500 border border-zinc-200 transition-colors hover:bg-emerald-500 hover:text-white hover:border-emerald-500 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700 dark:hover:text-zinc-950"
+                >
+                  <Mail size={18} />
+                </a>
               </div>
             </div>
 
