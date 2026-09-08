@@ -222,7 +222,7 @@ function App() {
                   {t.hero.description}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 flex flex-nowrap gap-3">
                   <a href="/documents/Daniel_Niewiarowski_Frontend_CV.pdf" download>
                     <Button text={t.buttons.downloadCV} icon={Download} color="#10B981" size="lg" rounded="lg" />
                   </a>
@@ -311,39 +311,32 @@ function App() {
               </div>
             </div>
 
-            {/* Core stack — official logos */}
-            <div className="mt-16 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 items-center">
-              <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500">
-                <span className="h-px w-8 bg-zinc-700" />
-                {t.coreStack}
+            {/* Core stack & Tools — one horizontal row */}
+            <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-6">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500 whitespace-nowrap">
+                  <span className="h-px w-8 bg-zinc-700" />
+                  {t.coreStack}
+                </div>
+                <div className="flex flex-nowrap gap-3">
+                  {technologies.map((tech) => (
+                    <TechLogoCard key={tech.name} tech={tech} />
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-4">
-                {technologies.map((tech) => (
-                  <div key={tech.name} className="group flex flex-col items-center gap-2">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-zinc-700 bg-zinc-800/80 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/50">
-                      <img src={tech.src} alt={`${tech.name} logo`} className="h-9 w-9" />
-                    </div>
-                    <span className="text-xs font-semibold text-zinc-400">{tech.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Tools — official logos */}
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 items-center">
-              <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500">
-                <span className="h-px w-8 bg-zinc-700" />
-                {t.tools}
-              </div>
-              <div className="flex flex-wrap gap-4">
-                {tools.map((tool) => (
-                  <div key={tool.name} className="group flex flex-col items-center gap-2">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-zinc-700 bg-zinc-800/80 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/50">
-                      <img src={tool.src} alt={`${tool.name} logo`} className="h-9 w-9" />
-                    </div>
-                    <span className="text-xs font-semibold text-zinc-400">{tool.name}</span>
-                  </div>
-                ))}
+              <span className="hidden h-14 w-px bg-zinc-800 lg:block" />
+
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 text-sm font-semibold text-zinc-500 whitespace-nowrap">
+                  <span className="h-px w-8 bg-zinc-700" />
+                  {t.tools}
+                </div>
+                <div className="flex flex-nowrap gap-3">
+                  {tools.map((tool) => (
+                    <TechLogoCard key={tool.name} tech={tool} />
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -422,6 +415,17 @@ function App() {
         </div>
       </div>
     </ToastProvider>
+  );
+}
+
+function TechLogoCard({ tech }: { tech: TechLogo }) {
+  return (
+    <div className="group flex flex-col items-center gap-2">
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-zinc-700 bg-zinc-800/80 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/50">
+        <img src={tech.src} alt={`${tech.name} logo`} className="h-8 w-8" />
+      </div>
+      <span className="text-xs font-semibold text-zinc-400">{tech.name}</span>
+    </div>
   );
 }
 
