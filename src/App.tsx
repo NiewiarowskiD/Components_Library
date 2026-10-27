@@ -15,6 +15,7 @@ import { DataTablePreview } from "@/components/DataTable/DataTablePreview";
 import { ModalPreview } from "@/components/Modal/ModalPreview";
 import { ToastPreview } from "@/components/Toast/ToastPreview";
 import { ToastProvider } from "@/components/Toast/ToastProvider";
+import { WebsitePreview } from "@/components/WebsitePreview/WebsitePreview";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher";
 import { translations, type Language, type ExperienceItemData } from "@/i18n/translations";
 import {
@@ -119,22 +120,39 @@ const tools: TechLogo[] = [
   { name: "GitHub", src: "/logos/github.svg" },
 ];
 
+interface ClientLogo {
+  name: string;
+  src: string;
+}
+
+const clientLogos: ClientLogo[] = [
+  { name: "BNP Paribas", src: "/logos/clients/bnp-paribas.svg" },
+  { name: "UBS", src: "/logos/clients/UBS_Logo_SVG.svg.webp" },
+  { name: "Credit Suisse", src: "/logos/clients/Credit_Suisse_Logo.svg.webp" },
+  { name: "Roche", src: "/logos/clients/Roche_Logo.svg.webp" },
+  { name: "Opernhaus Zürich", src: "/logos/clients/opera-zurich.svg" },
+  { name: "Bachmann", src: "/logos/clients/Bachmann_electronic_GmbH_idmihTNSyF_1.svg" },
+  { name: "Dreipol", src: "/logos/clients/dreipol_logo.png" },
+];
+
 interface TechLogo {
   name: string;
   src: string;
 }
 
 type Theme = "light" | "dark";
+type WorkSection = "components" | "websites";
 
 function App() {
   const [activeView, setActiveView] = useState<ActiveView>("card");
+  const [workSection, setWorkSection] = useState<WorkSection>("components");
   const [showExperience, setShowExperience] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [language, setLanguage] = useState<Language>("ENG");
   const [theme, setTheme] = useState<Theme>("dark");
   const heroRef = useRef<HTMLDivElement>(null);
 
-  const t = translations[language];
+  const t = translations[language] ?? translations.ENG;
   const categories = buildCategories(t);
   const isDark = theme === "dark";
 
@@ -357,6 +375,19 @@ function App() {
               </div>
             </div>
 
+            {/* Companies I worked with — circular logos with names */}
+            <div className="mt-14 flex flex-col items-center gap-6">
+              <div className="flex flex-col items-center gap-2">
+                <h2 className={`text-2xl font-bold ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>{t.clients.title}</h2>
+                <p className={`mx-auto max-w-xl text-center text-sm leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>{t.clients.description}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+                {clientLogos.map((client) => (
+                  <ClientLogoCard key={client.name} client={client} isDark={isDark} />
+                ))}
+              </div>
+            </div>
+
             <button
               type="button"
               onClick={scrollToComponents}
@@ -378,41 +409,63 @@ function App() {
 
         <div ref={heroRef} className="py-16 px-4">
           <div className="max-w-5xl mx-auto">
-            <header className="text-center mb-10">
-              <Text content={t.components.featuredWork} color="#059669" size="sm" weight="bold" align="center" uppercase letterSpacing="widest" />
-              <h2 className={`mt-3 text-4xl font-bold mb-3 ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>{t.components.title}</h2>
-              <p className={`max-w-2xl mx-auto text-lg leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
-                {t.components.description}
+            <header className="mb-10 text-center">
+              <Text content={t.components.featuredWork} color="#3B82F6" size="sm" weight="bold" align="center" uppercase letterSpacing="widest" />
+              <h2 className={`mt-3 mb-3 text-4xl font-bold ${isDark ? "text-zinc-100" : "text-zinc-900"}`}>
+                {workSection === "components" ? t.components.title : t.components.websitesTitle}
+              </h2>
+              <p className={`mx-auto max-w-2xl text-lg leading-relaxed ${isDark ? "text-zinc-400" : "text-zinc-600"}`}>
+                {workSection === "components" ? t.components.description : t.components.websitesDescription}
               </p>
-              <div className={`mt-5 flex justify-center gap-2 text-xs font-semibold uppercase tracking-wider ${isDark ? "text-zinc-500" : "text-zinc-500"}`}>
-                <span>{t.components.techStack}</span><span>•</span><span>Tailwind CSS</span><span>•</span><span>SCSS</span>
+
+              <div className={`mx-auto mt-6 flex max-w-md gap-2 rounded-2xl border p-1 ${isDark ? "border-zinc-700 bg-zinc-900" : "border-zinc-200 bg-white"}`}>
+                {(["components", "websites"] as WorkSection[]).map((section) => (
+                  <button
+                    key={section}
+                    type="button"
+                    onClick={() => setWorkSection(section)}
+                    className={`flex-1 rounded-xl px-4 py-3 text-sm font-bold transition-all ${workSection === section ? (isDark ? "bg-blue-500 text-white shadow-lg shadow-blue-500/20" : "bg-blue-500 text-white shadow-lg shadow-blue-500/20") : (isDark ? "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100" : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900")}`}
+                  >
+                    {section === "components" ? t.components.workTabs.components : t.components.workTabs.websites}
+                  </button>
+                ))}
               </div>
             </header>
 
-            {/* Category navigation */}
-            <div className="mb-10 space-y-4">
-              {categories.map((cat) => (
-                <div key={cat.label}>
-                  <h3 className={`text-xs font-bold uppercase tracking-widest mb-2 px-1 ${isDark ? "text-zinc-600" : "text-zinc-400"}`}>
-                    {cat.label}
-                  </h3>
-                  <div className="flex flex-wrap gap-1.5">
-                    {cat.items.map((item) => (
-                      <ToggleButton
-                        key={item.id}
-                        active={activeView === item.id}
-                        onClick={() => setActiveView(item.id)}
-                        icon={item.icon}
-                        label={item.label}
-                        isDark={isDark}
-                      />
-                    ))}
-                  </div>
+            {workSection === "components" ? (
+              <>
+                <div className="mb-10 space-y-4">
+                  {categories.map((cat) => (
+                    <div key={cat.label}>
+                      <h3 className={`mb-2 px-1 text-xs font-bold uppercase tracking-widest ${isDark ? "text-zinc-600" : "text-zinc-400"}`}>
+                        {cat.label}
+                      </h3>
+                      <div className="flex flex-wrap gap-1.5">
+                        {cat.items.map((item) => (
+                          <ToggleButton
+                            key={item.id}
+                            active={activeView === item.id}
+                            onClick={() => setActiveView(item.id)}
+                            icon={item.icon}
+                            label={item.label}
+                            isDark={isDark}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-
-            {renderActiveView()}
+                {renderActiveView()}
+              </>
+            ) : (
+              <WebsitePreview
+                isDark={isDark}
+                pageLabel={t.components.pageLabel}
+                previewUnavailable={t.components.previewUnavailable}
+                visitLabel={t.components.visitWebsite}
+                websiteCopies={Object.values(t.components.websiteCards)}
+              />
+            )}
           </div>
         </div>
 
@@ -433,6 +486,17 @@ function App() {
         </div>
       </div>
     </ToastProvider>
+  );
+}
+
+function ClientLogoCard({ client, isDark }: { client: ClientLogo; isDark: boolean }) {
+  return (
+    <div className="group flex flex-col items-center gap-3">
+      <div className={`flex h-24 w-24 items-center justify-center rounded-full border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/50 ${isDark ? "border-zinc-700 bg-zinc-100" : "border-zinc-200 bg-white"}`}>
+        <img src={client.src} alt={`${client.name} logo`} className="max-h-12 max-w-[5.5rem] object-contain" />
+      </div>
+      <span className={`text-xs font-semibold ${isDark ? "text-zinc-400" : "text-zinc-500"}`}>{client.name}</span>
+    </div>
   );
 }
 

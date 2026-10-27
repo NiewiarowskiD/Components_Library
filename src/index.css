@@ -54,4 +54,45 @@
   .animate-dot-blink {
     animation: dot-blink 1.5s ease-in-out infinite;
   }
+
+  .website-preview-window {
+    height: 360px;
+    overflow: hidden;
+    position: relative;
+    background: #e2e8f0;
+  }
+
+  .website-preview-window img {
+    display: block;
+    height: 360px;
+    left: 0;
+    object-fit: cover;
+    object-position: top center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .website-preview-fallback {
+    align-items: center;
+    color: #64748b;
+    display: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 100%;
+    justify-content: center;
+    letter-spacing: 0.04em;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .website-preview-window.preview-unavailable .website-preview-fallback {
+    display: flex;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .website-preview-window img {
+      transform: translateY(0);
+    }
+  }
 }

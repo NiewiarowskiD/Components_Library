@@ -33,11 +33,29 @@ export interface Translation {
   coreStack: string;
   tools: string;
   scrollToExplore: string;
+  clients: {
+    title: string;
+    description: string;
+  };
   components: {
     featuredWork: string;
     title: string;
     description: string;
     techStack: string;
+    workTabs: {
+      components: string;
+      websites: string;
+    };
+    websitesTitle: string;
+    websitesDescription: string;
+    websiteCards: {
+      adamus: { title: string; description: string };
+      martyna: { title: string; description: string };
+      remonty: { title: string; description: string };
+    };
+    pageLabel: string;
+    previewUnavailable: string;
+    visitWebsite: string;
     categories: {
       foundations: string;
       formsInputs: string;
@@ -274,9 +292,9 @@ export const translations: Record<Language, Translation> = {
   ENG: {
     nav: { openTo: "Open to", work: "Work" },
     hero: {
-      role: "SOFTWARE ENGINEER",
+      role: "FRONTEND ENGINEER",
       description:
-        "I am a Software Engineer with experience in building scalable web applications and reusable UI component libraries. I specialize in React, Next.js, and Angular. I gained my experience working in international Agile teams for the Dreipol and in the banking sector (BNP Paribas/UBS).",
+        "I am a Frontend Engineer with experience in building scalable web applications and reusable UI component libraries. I specialize in React, Next.js, and Angular. I gained my experience working in international Agile teams for the Swiss agency Dreipol and in the banking sector (BNP Paribas).",
     },
     buttons: {
       downloadCV: "CV",
@@ -295,12 +313,36 @@ export const translations: Record<Language, Translation> = {
     coreStack: "Core stack",
     tools: "Tools",
     scrollToExplore: "Scroll to explore",
+    clients: {
+      title: "Companies I worked with",
+      description: "Organizations I collaborated with across banking, pharma, automation and culture.",
+    },
     components: {
       featuredWork: "FEATURED WORK",
       title: "Reusable UI Components",
       description:
         "A configurable component library built with React, TypeScript, Tailwind CSS and SCSS, focused on consistency, accessibility and speed.",
       techStack: "React",
+      workTabs: { components: "Components", websites: "Websites" },
+      websitesTitle: "Websites",
+      websitesDescription: "Selected websites designed and built for clients across legal and construction services.",
+      websiteCards: {
+        adamus: {
+          title: "Kancelaria Katarzyna Adamus-Mielniczuk",
+          description: "A professional legal services website for clients in Legnica and Lower Silesia.",
+        },
+        martyna: {
+          title: "Kancelaria Martyna Obecna",
+          description: "A calm, editorial website presenting a modern legal practice and its services.",
+        },
+        remonty: {
+          title: "Remonty",
+          description: "A clear, modern website for a renovation and construction business.",
+        },
+      },
+      pageLabel: "Page",
+      previewUnavailable: "Preview unavailable — open the website below",
+      visitWebsite: "Visit website",
       categories: {
         foundations: "Foundations",
         formsInputs: "Forms & Inputs",
@@ -352,12 +394,36 @@ export const translations: Record<Language, Translation> = {
     coreStack: "Główne technologie",
     tools: "Narzędzia",
     scrollToExplore: "Przewiń aby zobaczyć",
+    clients: {
+      title: "Firmy, dla których pracowałem",
+      description: "Organizacje, z którymi współpracowałem w branży bankowej, farmaceutycznej, automatyki i kultury.",
+    },
     components: {
       featuredWork: "REALIZACJE",
       title: "Komponenty UI wielokrotnego użytku",
       description:
         "Konfigurowalna biblioteka komponentów zbudowana z React, TypeScript, Tailwind CSS i SCSS, skupiona na spójności, dostępności i szybkości.",
       techStack: "React",
+      workTabs: { components: "Komponenty", websites: "Strony internetowe" },
+      websitesTitle: "Strony internetowe",
+      websitesDescription: "Wybrane strony internetowe stworzone dla klientów z branży prawnej i budowlanej.",
+      websiteCards: {
+        adamus: {
+          title: "Kancelaria Katarzyna Adamus-Mielniczuk",
+          description: "Profesjonalna strona kancelarii prawnej obsługującej klientów w Legnicy i na Dolnym Śląsku.",
+        },
+        martyna: {
+          title: "Kancelaria Martyna Obecna",
+          description: "Spokojna, redakcyjna strona przedstawiająca nowoczesną kancelarię i jej zakres usług.",
+        },
+        remonty: {
+          title: "Remonty",
+          description: "Przejrzysta, nowoczesna strona firmy remontowo-budowlanej.",
+        },
+      },
+      pageLabel: "Strona",
+      previewUnavailable: "Podgląd niedostępny — otwórz stronę poniżej",
+      visitWebsite: "Otwórz stronę",
       categories: {
         foundations: "Podstawy",
         formsInputs: "Formularze i pola",
@@ -409,12 +475,36 @@ export const translations: Record<Language, Translation> = {
     coreStack: "Kern-Stack",
     tools: "Werkzeuge",
     scrollToExplore: "Scrollen zum Entdecken",
+    clients: {
+      title: "Unternehmen, für die ich arbeitete",
+      description: "Organisationen, mit denen ich in Bankwesen, Pharma, Automation und Kultur zusammenarbeitete.",
+    },
     components: {
       featuredWork: "PORTFOLIO",
       title: "Wiederverwendbare UI-Komponenten",
       description:
         "Eine konfigurierbare Komponentenbibliothek, gebaut mit React, TypeScript, Tailwind CSS und SCSS, fokussiert auf Konsistenz, Zugänglichkeit und Geschwindigkeit.",
       techStack: "React",
+      workTabs: { components: "Komponenten", websites: "Websites" },
+      websitesTitle: "Websites",
+      websitesDescription: "Ausgewählte Websites für Kunden aus den Bereichen Recht und Bauwesen.",
+      websiteCards: {
+        adamus: {
+          title: "Kanzlei Katarzyna Adamus-Mielniczuk",
+          description: "Eine professionelle Website für eine Rechtskanzlei in Legnica und Niederschlesien.",
+        },
+        martyna: {
+          title: "Kanzlei Martyna Obecna",
+          description: "Eine ruhige, redaktionelle Website für eine moderne Rechtskanzlei und ihre Leistungen.",
+        },
+        remonty: {
+          title: "Renovierungen",
+          description: "Eine klare, moderne Website für ein Renovierungs- und Bauunternehmen.",
+        },
+      },
+      pageLabel: "Seite",
+      previewUnavailable: "Vorschau nicht verfügbar — Website unten öffnen",
+      visitWebsite: "Website öffnen",
       categories: {
         foundations: "Grundlagen",
         formsInputs: "Formulare & Eingaben",
